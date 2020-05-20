@@ -3,6 +3,7 @@ package com.mycompany.myapp;
 import com.mycompany.myapp.client.OAuth2InterceptedFeignConfiguration;
 import com.mycompany.myapp.config.ApplicationProperties;
 
+import com.mycompany.myapp.service.SomeService;
 import io.github.jhipster.config.DefaultProfileUtil;
 import io.github.jhipster.config.JHipsterConstants;
 
@@ -33,10 +34,12 @@ public class TestfeignApp {
 
     private static final Logger log = LoggerFactory.getLogger(TestfeignApp.class);
 
+    static SomeService someService;
     private final Environment env;
 
-    public TestfeignApp(Environment env) {
+    public TestfeignApp(Environment env, SomeService someService) {
         this.env = env;
+        this.someService=someService;
     }
 
     /**
@@ -106,6 +109,7 @@ public class TestfeignApp {
         if (configServerStatus == null) {
             configServerStatus = "Not found or not setup for this application";
         }
+        log.info("Test feign "+someService.getDevices());
         log.info("\n----------------------------------------------------------\n\t" +
                 "Config Server: \t{}\n----------------------------------------------------------", configServerStatus);
     }
